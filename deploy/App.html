@@ -62,7 +62,7 @@
                                 load: function(store,data,success){
                                     Ext.Array.each( data, function(item){
                                         me.sprint_hash[item.get('Name')] = null;
-                                    });
+                                    }, this, true);
                                     for (var name in me.sprint_hash) {
                                         if ( me.sprint_hash.hasOwnProperty(name) ) {
                                             this._getStoriesForSprint(name);
