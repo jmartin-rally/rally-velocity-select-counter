@@ -52,7 +52,7 @@ Ext.define('CustomApp', {
                 listeners: {
                     load: function(store,data,success){
                         Ext.Array.each( data, function(item){
-                            me.sprint_hash[item.get('Name')] = [];
+                            me.sprint_hash[item.get('Name')] = null;
                         });
                         for (var name in me.sprint_hash) {
                             if ( me.sprint_hash.hasOwnProperty(name) ) {
@@ -104,7 +104,7 @@ Ext.define('CustomApp', {
         var go_on = true;
         for ( var name in this.sprint_hash ) {
             if ( this.sprint_hash.hasOwnProperty(name) ) {
-                if (this.sprint_hash[name].length == 0 ) {
+                if (this.sprint_hash[name] === null ) {
                     go_on = false;
                     window.console && console.log( "Waiting on ", name);
                     break;
@@ -172,6 +172,7 @@ Ext.define('CustomApp', {
             box.add({xtype:'container',html:'Average accepted for worst ' + lows.length + ' iterations:  ' + low_average});
         }
     },
+
     _formatFewerDecimals: function( number_of_places ) {
         return parseInt(number_of_places*100) / 100;
     },
