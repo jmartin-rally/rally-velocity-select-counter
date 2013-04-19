@@ -144,8 +144,8 @@ Ext.define('CustomApp', {
         }
         
         var filters = [
-            {property:'EndDate',operator:'>=',value:start_date},
-            {property:'StartDate',operator:'<=',value:end_date}
+            {property:'EndDate',operator:'>',value:start_date},
+            {property:'StartDate',operator:'<',value:end_date}
         ];
         this.sprint_hash = {};
         Ext.create('Rally.data.WsapiDataStore',{
