@@ -5,6 +5,10 @@ Ext.define('CustomApp', {
     allRelease: "--ANY--",
     items: [
         {xtype:'container',itemId:'selector_box', layout: { type: 'hbox' }},
+        {xtype:'container',html:'Selecting a release provides a range of iterations that have dates within that ' +
+                'range. Then select beginning and end iterations to calculate velocities with and push the ' +
+                'button to recalculate. Choose the "--ANY--" option to choose from sprints ' +
+                'before the current one.'},
         {xtype:'container',itemId:'average_box'},
         {xtype:'container',itemId:'chart_box'}
     ],
