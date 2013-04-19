@@ -55,10 +55,16 @@ Ext.define('CustomApp', {
         if ( this.start_box ) { this.start_box.destroy(); }
         if ( this.end_box ) { this.end_box.destroy(); }
         if ( this.down('#calculate_button') ) { this.down('#calculate_button').destroy(); }
-        var release_filter = [
-            {property:'EndDate',operator:'>=',value:Rally.util.DateTime.toIsoString(release.get('ReleaseStartDate'))},
-            {property:'StartDate',operator:'<=',value:Rally.util.DateTime.toIsoString(release.get('ReleaseDate'))}
-        ];
+        
+        var today = Rally.util.DateTime.toIsoString(new Date());
+        var release_filter = [{property:'EndDate',operator:'<',value:today}];
+
+        if (release.get('Name') !== this.allRelease ) {
+            release_filter = [
+                {property:'EndDate',operator:'>=',value:Rally.util.DateTime.toIsoString(release.get('ReleaseStartDate'))},
+                {property:'StartDate',operator:'<=',value:Rally.util.DateTime.toIsoString(release.get('ReleaseDate'))}
+            ];
+        }
 
         this.start_box = Ext.create('Rally.ui.combobox.IterationComboBox',{
             width: 300,
@@ -101,7 +107,7 @@ Ext.define('CustomApp', {
                         text:'Display Velocities',
                         disabled:true,
                         handler: function() {
-                            me._getIterations();
+                            me._getIterations(release);
                         }
                     });
                 },
@@ -129,13 +135,13 @@ Ext.define('CustomApp', {
             }
         }
     },
-    _getIterations: function() {
-        window.console && console.log("_getIterations");
+    _getIterations: function(release) {
+        window.console && console.log("_getIterations",release);
         var me = this;
+        var today = Rally.util.DateTime.toIsoString(new Date());
         
         var start_date = Rally.util.DateTime.toIsoString(this.start_box.getRecord().get('StartDate'));
         var end_date = Rally.util.DateTime.toIsoString(this.end_box.getRecord().get('EndDate'));
-        var today = Rally.util.DateTime.toIsoString(new Date());
         
         if ( start_date < today ) {
             if ( today < end_date ) {
