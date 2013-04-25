@@ -13,11 +13,11 @@
                 defaults: { padding: 5 },
                 allRelease: "--ANY--",
                 items: [
-                    {xtype:'container',itemId:'selector_box', layout: { type: 'hbox' }},
-                    {xtype:'container',html:'Selecting a release provides a range of iterations that have dates within that ' +
-                            'range. Then select beginning and end iterations to calculate velocities with and push the ' +
-                            'button to recalculate. Choose the "--ANY--" option to choose from sprints ' +
-                            'before the current one.'},
+                    {xtype:'container',itemId:'selector_box', layout: { type: 'vbox' }},
+                    {xtype:'container',html:'To generate velocities across sprints in a release, pick the release from the release dropdown, and the respective start sprint from the start sprint dropdown and ' +
+                            'the respective end sprint from the end sprint dropdown. <br/><br/> ' +
+                            'If you want to generate velocities across sprints across releases, pick "ANY" ' +
+                            'value from the release dropdown, and then the respective start sprint from the start sprint dropdown and the respective end sprint from the end sprint dropdown.'},
                     {xtype:'container',itemId:'average_box'},
                     {xtype:'container',itemId:'chart_box'}
                 ],
@@ -82,7 +82,7 @@
                     this.start_box = Ext.create('Rally.ui.combobox.IterationComboBox',{
                         width: 300,
                         itemId:'start_iteration_box',
-                        fieldLabel: 'Start Iteration:',
+                        fieldLabel: 'Start Sprint:',
                         storeConfig: {
                             filters: release_filter
                         },
@@ -94,7 +94,7 @@
                                 me.end_box = Ext.create('Rally.ui.combobox.IterationComboBox',{
                                     width: 300,
                                     itemId:'end_iteration_box',
-                                    fieldLabel: 'End Iteration:',
+                                    fieldLabel: 'End Sprint:',
                                     storeConfig: {
                                         filters: release_filter
                                     },
